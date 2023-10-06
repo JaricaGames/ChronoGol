@@ -1,6 +1,5 @@
 package com.jarica.chronogol.presentation.screens.homescreen
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -30,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.jarica.chronogol.R
+import com.jarica.chronogol.presentation.components.CustomButton
 import com.jarica.chronogol.presentation.navigation.destinations.Destinations
 import com.jarica.chronogol.presentation.ui.theme.AzulGradientClaro
 import com.jarica.chronogol.presentation.ui.theme.AzulGradientOscuro
@@ -102,75 +102,19 @@ fun BodyUi(navController: NavHostController) {
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
 
-                Button(
-                    onClick = { navController.navigate(Destinations.OnePlayerScreen.route)},
-                    modifier = Modifier.fillMaxWidth(),
-                    border = BorderStroke(3.dp, color = Color.White.copy(0.65f))
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.soccer_ball_illustration_svgrepo_com),
-                            contentDescription = "",
-                            Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.size(15.dp))
-                        Text(
-                            text = "1 JUGADOR",
-                            fontFamily = keepcalm,
-                            fontWeight = FontWeight.Normal,
-                            fontSize = 16.sp,
-                            color = PurpleGrey80
-                        )
-                    }
-                }
-                Button(
-                    onClick = { navController.navigate(Destinations.TwoPlayerScreen.route)},
-                    modifier = Modifier.fillMaxWidth(),
-                    border = BorderStroke(3.dp, color = Color.White.copy(0.65f))
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.soccer_ball_illustration_svgrepo_com),
-                            contentDescription = "",
-                            Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.size(15.dp))
-                        Image(
-                            painter = painterResource(id = R.drawable.soccer_ball_illustration_svgrepo_com),
-                            contentDescription = "",
-                            Modifier.size(20.dp)
-                        )
-                        Spacer(modifier = Modifier.size(15.dp))
-                        Text(
-                            text = "2 JUGADORES",
-                            fontFamily = keepcalm,
-                            fontWeight = FontWeight.Normal,
-                            fontSize = 16.sp,
-                            color = PurpleGrey80
-                        )
-                    }
-                }
-                Button(
-                    onClick = { navController.navigate(Destinations.PuntuationScreen.route)},
-                    modifier = Modifier.fillMaxWidth(),
-                    border = BorderStroke(3.dp, color = Color.White.copy(0.65f))
-                ) {
-                    Text(
-                        text = "PUNTUACIONES",
-                        fontFamily = keepcalm,
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 16.sp,
-                        color = PurpleGrey80
-                    )
-                }
+                CustomButton(
+                    Modifier.fillMaxWidth(),
+                    "1 JUGADOR",
+                    R.drawable.soccer_ball_illustration_svgrepo_com
+                ) { navController.navigate(Destinations.OnePlayerScreen.route) }
+
+                CustomButton(
+                    Modifier.fillMaxWidth(),
+                    "Puntuaciones",
+                    R.drawable.list_numbers_svgrepo_com
+                ) { navController.navigate(Destinations.PuntuationScreen.route) }
+
+
             }
 
 

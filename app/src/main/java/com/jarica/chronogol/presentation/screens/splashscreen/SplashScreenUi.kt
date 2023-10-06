@@ -7,14 +7,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.jarica.chronogol.presentation.navigation.destinations.Destinations
+import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreenUi(navController: NavHostController) {
+
+    LaunchedEffect(key1 = true ){
+        delay(2500L)
+        navController.popBackStack()
+        navController.navigate(Destinations.HomeScreen.route)
+    }
 
     Box(modifier = Modifier
         .fillMaxSize()

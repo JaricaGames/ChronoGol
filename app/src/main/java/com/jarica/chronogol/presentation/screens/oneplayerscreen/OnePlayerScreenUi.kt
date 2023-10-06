@@ -1,21 +1,35 @@
 package com.jarica.chronogol.presentation.screens.oneplayerscreen
 
-import android.util.Log
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -28,6 +42,7 @@ import com.jarica.chronogol.presentation.ui.theme.AzulGradientClaro
 import com.jarica.chronogol.presentation.ui.theme.AzulGradientOscuro
 import com.jarica.chronogol.presentation.ui.theme.AzulOscuro
 import com.jarica.chronogol.presentation.ui.theme.keepcalm
+import com.jarica.chronogol.presentation.ui.theme.transparent
 import com.jarica.chronogol.presentation.util.SquashedOvalDown
 
 @Composable
@@ -36,7 +51,7 @@ fun OnePlayerScreenUi(navController: NavHostController, onePlayerViewModel: OneP
     val totalTime: Long by onePlayerViewModel.totalTime.observeAsState(2000)
     val currentTime: Long by onePlayerViewModel.currentTime.observeAsState(0)
     val value: Float by onePlayerViewModel.value.observeAsState(0f)
-    val size: IntSize by onePlayerViewModel.size.observeAsState(initial = IntSize.Zero )
+    val size: IntSize by onePlayerViewModel.size.observeAsState(initial = IntSize.Zero)
     val isTimeRunning: Boolean by onePlayerViewModel.isTimerRunning.observeAsState(false)
 
     Box(
@@ -52,14 +67,21 @@ fun OnePlayerScreenUi(navController: NavHostController, onePlayerViewModel: OneP
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             HeaderUi()
-            BodyUi(navController, onePlayerViewModel, totalTime, currentTime, value, size, isTimeRunning)
+            BodyUi(
+                navController,
+                onePlayerViewModel,
+                totalTime,
+                currentTime,
+                value,
+                size,
+                isTimeRunning
+            )
 
         }
 
     }
 
 }
-
 
 
 @Composable
@@ -95,9 +117,9 @@ fun BodyUi(
     ) {
         CircularProgressBar(
             totalTime = totalTime,
-            AzulGradientOscuro,
-            Color.Gray,
             AzulGradientClaro,
+            Color.Gray,
+            AzulGradientOscuro,
             modifier = Modifier.size(250.dp),
             onePlayerViewModel,
             currentTime,
@@ -105,6 +127,7 @@ fun BodyUi(
             size,
             isTimeRunning
         )
+        ButtonPlayPause(onePlayerViewModel, isTimeRunning)
     }
 }
 
@@ -133,4 +156,35 @@ fun HeaderUi() {
             color = Color.White,
         )
     }
+}
+
+@Composable
+fun ButtonPlayPause(onePlayerViewModel: OnePlayerViewModel, isTimeRunning: Boolean) {
+
+
+    Box(
+        modifier = Modifier
+            .offset(0.dp, -75.dp)
+            .size(150.dp)
+            .clip(CircleShape)
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        AzulGradientClaro,
+                        AzulGradientOscuro
+                    )
+                )
+            )
+            .clickable { onePlayerViewModel.playPauseClicked(isTimeRunning) }, contentAlignment = Alignment.Center
+    ) {
+        if (isTimeRunning) {
+            Text(text = "PAUSE", color = Color.White)
+        } else {
+
+            Text(text = "PLAY", color = Color.White)
+        }
+    }
+
+
+
 }

@@ -38,7 +38,7 @@ fun CircularProgressBar(
     size: IntSize,
     isTimeRunning: Boolean,
     initialValue: Float = 0f,
-    strokeWidth: Dp = 8.dp,
+    strokeWidth: Dp = 12.dp,
 ) {
 
     Column(
@@ -85,18 +85,7 @@ fun CircularProgressBar(
 
 
         }
-        Button(
-            onClick = {
-                onePlayerViewModel.playPauseClicked(isTimeRunning)
-                /*if (currentTime <= 0L) {
-                    currentTime = totalTime
-                    isTimerRunning = true
-                } else {
-                    isTimerRunning = !isTimerRunning
-                }*/
-            }) {
-            Text(text = "PLAY", color = Color.White)
-        }
+
     }
 
 }

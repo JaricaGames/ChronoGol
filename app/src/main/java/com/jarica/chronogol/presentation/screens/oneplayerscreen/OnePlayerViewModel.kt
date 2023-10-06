@@ -35,18 +35,17 @@ class OnePlayerViewModel @Inject constructor() : ViewModel() {
     init {
         _size.value = IntSize.Zero
         _value.value = 0f
-        _currentTime.value = 2000
+        _currentTime.value = 3000
         _isTimerRunning.value = false
-        _totalTime.value = 2000L
+        _totalTime.value = 3000L
     }
 
     fun playPauseClicked(isTimeRunning: Boolean) {
 
         _isTimerRunning.value = !isTimeRunning
-        Log.d("OnePlayerVM", _isTimerRunning.value.toString())
 
         viewModelScope.launch(Dispatchers.IO) {
-            
+
             while (_currentTime.value!! > 0 && _isTimerRunning.value == true) {
                 delay(10L)
                 _currentTime.postValue(_currentTime.value?.minus(1L) ?: -1L)
