@@ -18,6 +18,15 @@ val sans = FontFamily(
     Font(R.font.sanslight, FontWeight.Light),
     Font(R.font.sansregular, FontWeight.Normal)
 )
+
+val rajdhani = FontFamily(
+    Font(R.font.rajdhanimedium, FontWeight.Medium),
+    Font(R.font.rajdhanisemibold, FontWeight.SemiBold),
+    Font(R.font.rajdhanibold, FontWeight.Bold),
+    Font(R.font.rajdhaniregular, FontWeight.Normal)
+)
+
+
 val digital = FontFamily(
     Font(R.font.display, FontWeight.Normal)
 )
