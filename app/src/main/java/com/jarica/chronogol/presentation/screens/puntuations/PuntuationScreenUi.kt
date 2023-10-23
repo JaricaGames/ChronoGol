@@ -25,9 +25,10 @@ import com.jarica.chronogol.presentation.ui.theme.AzulGradientClaro
 import com.jarica.chronogol.presentation.ui.theme.AzulGradientOscuro
 import com.jarica.chronogol.presentation.ui.theme.AzulOscuro
 import com.jarica.chronogol.presentation.ui.theme.keepcalm
+import com.jarica.chronogol.presentation.ui.theme.rajdhani
 import com.jarica.chronogol.presentation.util.SquashedOvalDown
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun PuntuationScreenUi(navController: NavHostController) {
 
@@ -87,10 +88,10 @@ fun HeaderUi() {
     ) {
         Text(
             text = "Puntuaciones",
-            fontFamily = keepcalm,
+            fontFamily = rajdhani,
             fontWeight = FontWeight.Normal,
             fontSize = 22.sp,
-            color = Color.White,
+            color = AzulOscuro,
         )
     }
 }

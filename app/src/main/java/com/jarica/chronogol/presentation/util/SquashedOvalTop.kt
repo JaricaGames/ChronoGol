@@ -18,9 +18,9 @@ class SquashedOvalTop : Shape {
             // We create an Oval that starts at ¼ of the width, and ends at ¾ of the width of the container.
             addOval(
                 Rect(
-                    left = -size.width * 1.25f,
+                    left = -size.width * 1.65f,
                     top = 0f,
-                    right = size.width * 2.25f,
+                    right = size.width * 2.65f,
                     bottom = size.height*2
                 )
             )

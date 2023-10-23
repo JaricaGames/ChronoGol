@@ -7,10 +7,15 @@ import androidx.navigation.compose.composable
 import com.jarica.chronogol.presentation.navigation.Graph.ROOT_GRAPH
 import com.jarica.chronogol.presentation.navigation.destinations.Destinations
 import com.jarica.chronogol.presentation.screens.oneplayerscreen.OnePlayerViewModel
+import com.jarica.chronogol.presentation.screens.optionscreen.OptionViewModel
 import com.jarica.chronogol.presentation.screens.splashscreen.SplashScreenUi
 
 @Composable
-fun RootNavGraph(navController: NavHostController, OnePlayerViewModel: OnePlayerViewModel) {
+fun RootNavGraph(
+    navController: NavHostController,
+    OnePlayerViewModel: OnePlayerViewModel,
+    OptionViewModel: OptionViewModel
+) {
 
     NavHost(
     navController = navController,
@@ -22,7 +27,7 @@ fun RootNavGraph(navController: NavHostController, OnePlayerViewModel: OnePlayer
             SplashScreenUi(navController)
         }
 
-        HomeNavGraph(navController = navController, OnePlayerViewModel)
+        HomeNavGraph(navController = navController, OnePlayerViewModel, OptionViewModel)
 
     }
 }

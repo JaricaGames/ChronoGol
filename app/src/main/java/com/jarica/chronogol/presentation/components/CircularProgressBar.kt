@@ -27,17 +27,17 @@ import kotlin.math.sin
 
 @Composable
 fun CircularProgressBar(
-    totalTime: Long,
+    totalTime: Int,
     handleColor: Color,
     inactiveBarColor: Color,
     activeBarColor: Color,
     modifier: Modifier,
     onePlayerViewModel: OnePlayerViewModel,
-    currentTime: Long,
+    currentTime: Int,
     value: Float,
     size: IntSize,
     isTimeRunning: Boolean,
-    initialValue: Float = 0f,
+    initialValue: Float = 50f,
     strokeWidth: Dp = 12.dp,
 ) {
 

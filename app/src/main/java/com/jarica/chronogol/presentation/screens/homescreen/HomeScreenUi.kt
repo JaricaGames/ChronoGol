@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -34,8 +36,10 @@ import com.jarica.chronogol.presentation.navigation.destinations.Destinations
 import com.jarica.chronogol.presentation.ui.theme.AzulGradientClaro
 import com.jarica.chronogol.presentation.ui.theme.AzulGradientOscuro
 import com.jarica.chronogol.presentation.ui.theme.AzulOscuro
+import com.jarica.chronogol.presentation.ui.theme.Purple80
 import com.jarica.chronogol.presentation.ui.theme.PurpleGrey80
 import com.jarica.chronogol.presentation.ui.theme.keepcalm
+import com.jarica.chronogol.presentation.ui.theme.rajdhani
 import com.jarica.chronogol.presentation.util.SquashedOvalTop
 
 @Composable
@@ -46,7 +50,6 @@ fun HomeScreenUi(navController: NavHostController) {
             .fillMaxSize()
             .background(AzulOscuro)
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxSize(),
@@ -55,7 +58,6 @@ fun HomeScreenUi(navController: NavHostController) {
         ) {
             HeaderUi()
             BodyUi(navController)
-
         }
 
     }
@@ -104,7 +106,7 @@ fun BodyUi(navController: NavHostController) {
 
                 CustomButton(
                     Modifier.fillMaxWidth(),
-                    "1 JUGADOR",
+                    "1 Jugador",
                     R.drawable.soccer_ball_illustration_svgrepo_com
                 ) { navController.navigate(Destinations.OnePlayerScreen.route) }
 
@@ -113,6 +115,12 @@ fun BodyUi(navController: NavHostController) {
                     "Puntuaciones",
                     R.drawable.list_numbers_svgrepo_com
                 ) { navController.navigate(Destinations.PuntuationScreen.route) }
+
+                CustomButton(
+                    Modifier.fillMaxWidth(),
+                    "Opciones",
+                    R.drawable.preferencesoptions
+                ) { navController.navigate(Destinations.OptionScreen.route) }
 
 
             }
@@ -132,8 +140,8 @@ fun HeaderUi() {
     ) {
         Text(
             text = "CHRONOGOL",
-            fontFamily = keepcalm,
-            fontWeight = FontWeight.Normal,
+            fontFamily = rajdhani,
+            fontWeight = FontWeight.ExtraBold,
             fontSize = 45.sp,
             color = AzulGradientClaro,
         )

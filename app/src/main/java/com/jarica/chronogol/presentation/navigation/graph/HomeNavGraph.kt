@@ -9,13 +9,16 @@ import com.jarica.chronogol.presentation.navigation.destinations.Destinations
 import com.jarica.chronogol.presentation.screens.homescreen.HomeScreenUi
 import com.jarica.chronogol.presentation.screens.oneplayerscreen.OnePlayerScreenUi
 import com.jarica.chronogol.presentation.screens.oneplayerscreen.OnePlayerViewModel
+import com.jarica.chronogol.presentation.screens.optionscreen.OptionScreenUi
+import com.jarica.chronogol.presentation.screens.optionscreen.OptionViewModel
 import com.jarica.chronogol.presentation.screens.puntuations.PuntuationScreenUi
 import com.jarica.chronogol.presentation.screens.twoplayersscreen.TwoPlayersScreenUi
 
 
 fun NavGraphBuilder.HomeNavGraph(
     navController: NavHostController,
-    OnePlayerViewModel: OnePlayerViewModel
+    OnePlayerViewModel: OnePlayerViewModel,
+    OptionViewModel: OptionViewModel
 ) {
     navigation(
         route = HOME_GRAPH,
@@ -25,13 +28,16 @@ fun NavGraphBuilder.HomeNavGraph(
             HomeScreenUi(navController = navController)
         }
         composable(route = Destinations.OnePlayerScreen.route) {
-            OnePlayerScreenUi(navController = navController, onePlayerViewModel = OnePlayerViewModel)
+            OnePlayerScreenUi(navController = navController, onePlayerViewModel = OnePlayerViewModel, OptionViewModel)
         }
         composable(route = Destinations.TwoPlayerScreen.route) {
             TwoPlayersScreenUi(navController = navController)
         }
         composable(route = Destinations.PuntuationScreen.route) {
             PuntuationScreenUi(navController = navController)
+        }
+        composable(route = Destinations.OptionScreen.route) {
+            OptionScreenUi(navController = navController, OptionViewModel, OnePlayerViewModel)
         }
     }
 }

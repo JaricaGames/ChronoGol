@@ -21,4 +21,8 @@ sealed class Destinations (val route:String){
     object PuntuationScreen :Destinations(
         route = "PuntuationScreen"
     )
+
+    object OptionScreen :Destinations(
+        route = "OptionScreen"
+    )
 }
