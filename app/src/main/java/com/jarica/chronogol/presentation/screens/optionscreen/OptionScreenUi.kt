@@ -99,10 +99,11 @@ fun BodyUi(
         Text(
             text = "Duración del partido:",
             color = Color.White,
-            fontSize = 15.sp,
-            fontFamily = rajdhani
+            fontSize = 18.sp,
+            fontFamily = rajdhani,
+            fontWeight = FontWeight.Normal
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(32.dp))
         Row(
             Modifier
                 .fillMaxWidth(),
@@ -137,7 +138,13 @@ fun BodyUi(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "Sonidos:", color = Color.White, fontSize = 15.sp, fontFamily = rajdhani)
+            Text(
+                text = "Sonidos:",
+                color = Color.White,
+                fontSize = 18.sp,
+                fontFamily = rajdhani,
+                fontWeight = FontWeight.Normal
+            )
             Switch(
                 checked = isSoundActive,
                 onCheckedChange = {
@@ -155,7 +162,13 @@ fun BodyUi(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "Música:", color = Color.White, fontSize = 15.sp, fontFamily = rajdhani)
+            Text(
+                text = "Música:",
+                color = Color.White,
+                fontSize = 18.sp,
+                fontFamily = rajdhani,
+                fontWeight = FontWeight.Normal
+            )
             Switch(
                 checked = isMusicActive,
                 onCheckedChange = { optionViewModel.onMusicActiveChecked() },
@@ -187,8 +200,8 @@ fun HeaderUi() {
         Text(
             text = "Opciones",
             fontFamily = rajdhani,
-            fontWeight = FontWeight.Normal,
-            fontSize = 22.sp,
+            fontWeight = FontWeight.ExtraBold,
+            fontSize = 40.sp,
             color = AzulOscuro,
         )
     }
@@ -211,11 +224,11 @@ fun DurationGameCustomButton(
             shape = RoundedCornerShape(10.dp),
             modifier = modifier
         ) {
-            Text(text = "$text''", color = Color.White, fontSize = 18.sp, fontFamily = rajdhani)
+            Text(text = "$text''", color = Color.White, fontSize = 22.sp, fontFamily = rajdhani)
         }
     } else {
         Button(
-            colors = ButtonDefaults.buttonColors(containerColor = Purple80.copy(0.05f)),
+            colors = ButtonDefaults.buttonColors(containerColor = Purple80.copy(0.08f)),
             onClick = {
                 optionViewModel.changeDuration(text.toInt())
                 onePlayerViewModel.changeDuration(text.toInt())
@@ -223,7 +236,7 @@ fun DurationGameCustomButton(
             shape = RoundedCornerShape(0.dp),
             modifier = modifier
         ) {
-            Text(text = "$text''", color = Color.White, fontSize = 18.sp, fontFamily = rajdhani)
+            Text(text = "$text''", color = Color.White, fontSize = 20.sp, fontFamily = rajdhani)
         }
     }
 }

@@ -27,20 +27,12 @@ val rajdhani = FontFamily(
 )
 
 
-val digital = FontFamily(
-    Font(R.font.display, FontWeight.Normal)
-)
-
-val keepcalm = FontFamily(
-    Font(R.font.keepcalmmedium, FontWeight.Normal)
-)
-
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 20.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
     )

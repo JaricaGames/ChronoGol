@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,9 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -33,17 +29,15 @@ import androidx.navigation.NavHostController
 import com.jarica.chronogol.R
 import com.jarica.chronogol.presentation.components.CustomButton
 import com.jarica.chronogol.presentation.navigation.destinations.Destinations
+import com.jarica.chronogol.presentation.screens.puntuations.PuntuationViewModel
 import com.jarica.chronogol.presentation.ui.theme.AzulGradientClaro
 import com.jarica.chronogol.presentation.ui.theme.AzulGradientOscuro
 import com.jarica.chronogol.presentation.ui.theme.AzulOscuro
-import com.jarica.chronogol.presentation.ui.theme.Purple80
-import com.jarica.chronogol.presentation.ui.theme.PurpleGrey80
-import com.jarica.chronogol.presentation.ui.theme.keepcalm
 import com.jarica.chronogol.presentation.ui.theme.rajdhani
 import com.jarica.chronogol.presentation.util.SquashedOvalTop
 
 @Composable
-fun HomeScreenUi(navController: NavHostController) {
+fun HomeScreenUi(navController: NavHostController, puntuationViewModel: PuntuationViewModel) {
 
     Box(
         modifier = Modifier
@@ -57,7 +51,7 @@ fun HomeScreenUi(navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             HeaderUi()
-            BodyUi(navController)
+            BodyUi(navController, puntuationViewModel)
         }
 
     }
@@ -65,7 +59,7 @@ fun HomeScreenUi(navController: NavHostController) {
 }
 
 @Composable
-fun BodyUi(navController: NavHostController) {
+fun BodyUi(navController: NavHostController, puntuationViewModel: PuntuationViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -108,13 +102,18 @@ fun BodyUi(navController: NavHostController) {
                     Modifier.fillMaxWidth(),
                     "1 Jugador",
                     R.drawable.soccer_ball_illustration_svgrepo_com
-                ) { navController.navigate(Destinations.OnePlayerScreen.route) }
+                ) {
+                    navController.navigate(Destinations.OnePlayerScreen.route)
+                    puntuationViewModel.getPuntuations30ByOrder()
+                }
 
                 CustomButton(
                     Modifier.fillMaxWidth(),
                     "Puntuaciones",
                     R.drawable.list_numbers_svgrepo_com
-                ) { navController.navigate(Destinations.PuntuationScreen.route) }
+                ) {
+
+                    navController.navigate(Destinations.PuntuationScreen.route) }
 
                 CustomButton(
                     Modifier.fillMaxWidth(),

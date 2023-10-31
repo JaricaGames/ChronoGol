@@ -1,13 +1,16 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id ("org.jetbrains.kotlin.plugin.serialization") version  "1.8.10"
 }
 
 android {
     namespace = "com.jarica.chronogol"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.jarica.chronogol"
@@ -20,6 +23,10 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+
+
+
     }
 
     buildTypes {
@@ -49,6 +56,8 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+
 }
 
 
@@ -60,6 +69,7 @@ kapt {
 dependencies {
 
     val nav_version = "2.5.3"
+    val ktorVersion = "1.5.0"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
@@ -88,11 +98,26 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
 
     // LiveData
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
-    implementation ("androidx.compose.runtime:runtime-livedata:1.3.3")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.5.4")
 
     //Lottie
     implementation ("com.airbnb.android:lottie-compose:6.1.0")
+
+    //Supabase
+
+    implementation ("io.github.jan-tennert.supabase:postgrest-kt:1.4.4")
+    implementation ("io.ktor:ktor-client-android:2.3.0")
+    implementation( "io.ktor:ktor-utils:2.3.5")
+    implementation ("io.ktor:ktor-client-core:2.3.5")
+    implementation ("io.coil-kt:coil-compose:1.3.2")
+    implementation ("io.ktor:ktor-client-android:$2.3.5")
+
+    //gson
+    implementation ("com.google.code.gson:gson:2.9.0")
+
+
+
 
 
 

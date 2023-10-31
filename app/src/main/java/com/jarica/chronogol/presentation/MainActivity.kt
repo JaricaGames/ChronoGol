@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.jarica.chronogol.presentation.navigation.graph.RootNavGraph
 import com.jarica.chronogol.presentation.screens.oneplayerscreen.OnePlayerViewModel
 import com.jarica.chronogol.presentation.screens.optionscreen.OptionViewModel
+import com.jarica.chronogol.presentation.screens.puntuations.PuntuationViewModel
 import com.jarica.chronogol.presentation.ui.theme.ChronoGolTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,8 +22,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private lateinit var navController: NavHostController
-    private val OnePlayerViewModel: OnePlayerViewModel by viewModels()
-    private val OptionViewModel: OptionViewModel by viewModels()
+    private val onePlayerViewModel: OnePlayerViewModel by viewModels()
+    private val optionViewModel: OptionViewModel by viewModels()
+    private val puntuationViewModel: PuntuationViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +40,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     navController = rememberNavController()
-                    RootNavGraph(navController = navController, OnePlayerViewModel, OptionViewModel)
+                    RootNavGraph(navController = navController, onePlayerViewModel, optionViewModel, puntuationViewModel)
                 }
             }
         }

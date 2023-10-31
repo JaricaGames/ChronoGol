@@ -12,32 +12,34 @@ import com.jarica.chronogol.presentation.screens.oneplayerscreen.OnePlayerViewMo
 import com.jarica.chronogol.presentation.screens.optionscreen.OptionScreenUi
 import com.jarica.chronogol.presentation.screens.optionscreen.OptionViewModel
 import com.jarica.chronogol.presentation.screens.puntuations.PuntuationScreenUi
+import com.jarica.chronogol.presentation.screens.puntuations.PuntuationViewModel
 import com.jarica.chronogol.presentation.screens.twoplayersscreen.TwoPlayersScreenUi
 
 
 fun NavGraphBuilder.HomeNavGraph(
     navController: NavHostController,
-    OnePlayerViewModel: OnePlayerViewModel,
-    OptionViewModel: OptionViewModel
+    onePlayerViewModel: OnePlayerViewModel,
+    optionViewModel: OptionViewModel,
+    puntuationViewModel: PuntuationViewModel
 ) {
     navigation(
         route = HOME_GRAPH,
         startDestination = Destinations.HomeScreen.route
     ) {
         composable(route = Destinations.HomeScreen.route) {
-            HomeScreenUi(navController = navController)
+            HomeScreenUi(navController = navController, puntuationViewModel)
         }
         composable(route = Destinations.OnePlayerScreen.route) {
-            OnePlayerScreenUi(navController = navController, onePlayerViewModel = OnePlayerViewModel, OptionViewModel)
+            OnePlayerScreenUi(navController = navController, onePlayerViewModel = onePlayerViewModel, optionViewModel)
         }
         composable(route = Destinations.TwoPlayerScreen.route) {
             TwoPlayersScreenUi(navController = navController)
         }
         composable(route = Destinations.PuntuationScreen.route) {
-            PuntuationScreenUi(navController = navController)
+            PuntuationScreenUi(navController = navController, puntuationViewModel)
         }
         composable(route = Destinations.OptionScreen.route) {
-            OptionScreenUi(navController = navController, OptionViewModel, OnePlayerViewModel)
+            OptionScreenUi(navController = navController, optionViewModel, onePlayerViewModel)
         }
     }
 }

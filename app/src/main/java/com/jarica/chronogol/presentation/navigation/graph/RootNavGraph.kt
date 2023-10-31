@@ -8,13 +8,15 @@ import com.jarica.chronogol.presentation.navigation.Graph.ROOT_GRAPH
 import com.jarica.chronogol.presentation.navigation.destinations.Destinations
 import com.jarica.chronogol.presentation.screens.oneplayerscreen.OnePlayerViewModel
 import com.jarica.chronogol.presentation.screens.optionscreen.OptionViewModel
+import com.jarica.chronogol.presentation.screens.puntuations.PuntuationViewModel
 import com.jarica.chronogol.presentation.screens.splashscreen.SplashScreenUi
 
 @Composable
 fun RootNavGraph(
     navController: NavHostController,
-    OnePlayerViewModel: OnePlayerViewModel,
-    OptionViewModel: OptionViewModel
+    onePlayerViewModel: OnePlayerViewModel,
+    optionViewModel: OptionViewModel,
+    puntuationViewModel: PuntuationViewModel
 ) {
 
     NavHost(
@@ -27,7 +29,7 @@ fun RootNavGraph(
             SplashScreenUi(navController)
         }
 
-        HomeNavGraph(navController = navController, OnePlayerViewModel, OptionViewModel)
+        HomeNavGraph(navController = navController, onePlayerViewModel, optionViewModel, puntuationViewModel)
 
     }
 }
