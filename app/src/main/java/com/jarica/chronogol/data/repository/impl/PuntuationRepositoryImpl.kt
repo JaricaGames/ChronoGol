@@ -1,20 +1,17 @@
 package com.jarica.chronogol.data.repository.impl
 
-import com.jarica.chronogol.data.ApiResult
-import com.jarica.chronogol.data.PuntuationDataSource
+
 import com.jarica.chronogol.data.model.PuntuationDto
 import com.jarica.chronogol.data.repository.PuntuationRepository
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.query.Columns
 import io.github.jan.supabase.postgrest.query.Order
-import io.github.jan.supabase.postgrest.result.PostgrestResult
-import kotlinx.coroutines.flow.Flow
-import kotlinx.serialization.builtins.serializer
 import javax.inject.Inject
 
 class PuntuationRepositoryImpl @Inject constructor(
     private val postgrest: Postgrest
 ): PuntuationRepository {
+
     override suspend fun getPuntuations(): List<PuntuationDto> {
         val response = postgrest["Puntuations"].select().decodeList<PuntuationDto>()
         return response

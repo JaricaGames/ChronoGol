@@ -10,7 +10,4 @@ interface PuntuationRepository {
     suspend fun getPuntuations60ByOrder() : List<PuntuationDto>
     suspend fun getPuntuations90ByOrder() : List<PuntuationDto>
 
-   // fun findAll(): Flow<ApiResult<List<PuntuationDto>>>
-
-
     }

@@ -41,6 +41,9 @@ class OnePlayerViewModel @Inject constructor() : ViewModel() {
     private val _isWhistleAnimationActive = MutableLiveData<Boolean>()
     val isWhistleAnimationActive: LiveData<Boolean> = _isWhistleAnimationActive
 
+    private val _isGameFinished = MutableLiveData<Boolean>()
+    val isGameFinished: LiveData<Boolean> = _isGameFinished
+
 
     init {
         _sizeCircularProgress.value = IntSize.Zero
@@ -54,14 +57,10 @@ class OnePlayerViewModel @Inject constructor() : ViewModel() {
     }
 
     fun playPauseClicked() {
-
         _isTimerRunning.value = !_isTimerRunning.value!!
-
         viewModelScope.launch(Dispatchers.IO) {
-
             while (_currentTime.value!! > 0 && _isTimerRunning.value == true) {
                 delay(10L)
-
                 if (_isTimerRunning.value == true) {
                     _currentTime.postValue(_currentTime.value?.minus(1))
                     _value.postValue(_currentTime.value!! / _totalTime.value?.toFloat()!!)
@@ -118,6 +117,12 @@ class OnePlayerViewModel @Inject constructor() : ViewModel() {
     fun changeDuration(value: Int) {
         _totalTime.value = value*100
         _currentTime.value = value*100
+    }
+
+    fun restartGame() {
+        _currentTime.postValue(_totalTime.value)
+        _isPenaltyActive.postValue(false)
+        _goals.postValue(0)
     }
 
 

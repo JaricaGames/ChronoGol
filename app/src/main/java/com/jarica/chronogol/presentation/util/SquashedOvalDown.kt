@@ -15,12 +15,12 @@ class SquashedOvalDown : Shape {
         density: Density
     ): Outline {
         val path = Path().apply {
-            // We create an Oval that starts at ¼ of the width, and ends at ¾ of the width of the container.
+
             addOval(
                 Rect(
-                    left = -size.width*3.6f ,
-                    top = -size.height,
-                    right = size.width*4.5f,
+                    left = -size.width ,
+                    top = -size.height*2f,
+                    right = size.width*2f,
                     bottom = size.height
                 )
             )
