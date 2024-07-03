@@ -16,7 +16,7 @@ android {
         applicationId = "com.jarica.chronogol"
         minSdk = 23
         targetSdk = 33
-        versionCode = 1
+        versionCode = 3
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -68,12 +68,12 @@ kapt {
 
 dependencies {
 
-    val nav_version = "2.5.3"
+    val nav_version = "2.7.5"
     val ktorVersion = "1.5.0"
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
-    implementation("androidx.activity:activity-compose:1.7.0")
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.activity:activity-compose:1.8.1")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
@@ -95,7 +95,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
     // ViewModel
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 
     // LiveData
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
@@ -115,6 +115,9 @@ dependencies {
 
     //gson
     implementation ("com.google.code.gson:gson:2.9.0")
+
+    //admob
+    implementation ("com.google.android.gms:play-services-ads:22.5.0")
 
 
 

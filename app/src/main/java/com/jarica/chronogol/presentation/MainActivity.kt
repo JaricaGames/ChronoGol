@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.google.android.gms.ads.MobileAds
 import com.jarica.chronogol.presentation.navigation.graph.RootNavGraph
 import com.jarica.chronogol.presentation.screens.oneplayerscreen.OnePlayerViewModel
 import com.jarica.chronogol.presentation.screens.optionscreen.OptionViewModel
@@ -31,6 +32,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         WindowCompat.setDecorFitsSystemWindows(window, false) // para quitar color a la barra de estado de ANDROID
+        MobileAds.initialize(this)
 
         setContent {
             ChronoGolTheme {

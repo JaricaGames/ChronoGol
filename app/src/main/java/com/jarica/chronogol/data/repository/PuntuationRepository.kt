@@ -9,5 +9,6 @@ interface PuntuationRepository {
     suspend fun getPuntuations30ByOrder() : List<PuntuationDto>
     suspend fun getPuntuations60ByOrder() : List<PuntuationDto>
     suspend fun getPuntuations90ByOrder() : List<PuntuationDto>
+    suspend fun setPuntuation(puntuation: PuntuationDto, value: Int?)
 
     }

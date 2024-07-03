@@ -67,7 +67,7 @@ class PuntuationViewModel @Inject constructor(
     fun changeDuration(duration: Int, onClick: () -> Unit) {
         _gameDuration.value = duration
         onClick()
-        OnePlayerViewModel().changeDuration(_gameDuration.value!!)
+        //onePlayerViewModel.changeDuration(_gameDuration.value!!)
     }
 }
 

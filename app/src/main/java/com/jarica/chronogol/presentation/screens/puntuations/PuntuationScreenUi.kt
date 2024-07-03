@@ -94,19 +94,17 @@ fun BodyUi(
         HeaderLazyColum()
         Spacer(modifier = Modifier.size(8.dp))
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            var position = 0
             var goalsAux = 0
-            var positionAux = 0
+            var position = 0
             var isshowposition: Boolean
 
             items(puntuationListByOrder) { item ->
                 if (item.goals != goalsAux) {
                     position += 1
-                    positionAux += 1
                     goalsAux = item.goals
                     isshowposition = true
                 } else {
-                    positionAux += 1
+                    position += 1
                     isshowposition = false
                 }
                 PuntuationRow(item, position, isshowposition)

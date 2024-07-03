@@ -1,5 +1,6 @@
 package com.jarica.chronogol.presentation.screens.oneplayerscreen
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +21,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntSize
@@ -39,6 +42,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.jarica.chronogol.R
+import com.jarica.chronogol.data.model.PuntuationDto
 import com.jarica.chronogol.presentation.components.CircularProgressBar
 import com.jarica.chronogol.presentation.navigation.destinations.Destinations
 import com.jarica.chronogol.presentation.screens.optionscreen.OptionViewModel
@@ -56,6 +60,9 @@ fun OnePlayerScreenUi(
     optionViewModel: OptionViewModel
 ) {
 
+    val adStattus: Boolean by onePlayerViewModel.adStatus.observeAsState(false)
+    val context = LocalContext.current
+
     val totalTime: Int by optionViewModel.gameDuration.observeAsState(3000)
     val goals: Int by onePlayerViewModel.goals.observeAsState(0)
     val currentTime: Int by onePlayerViewModel.currentTime.observeAsState(3000)
@@ -65,7 +72,8 @@ fun OnePlayerScreenUi(
     )
     val isTimeRunning: Boolean by onePlayerViewModel.isTimerRunning.observeAsState(false)
     val isPenaltyActive: Boolean by onePlayerViewModel.isPenaltyActive.observeAsState(false)
-    val isGameFinish: Boolean by onePlayerViewModel.isGameFinished.observeAsState(true)
+    val isGameFinish: Boolean by onePlayerViewModel.isGameFinished.observeAsState(false)
+    val playerName: String by onePlayerViewModel.playerName.observeAsState("")
 
     //Variables Anim
     val goalAnimation by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.animationgol))
@@ -97,7 +105,9 @@ fun OnePlayerScreenUi(
                     sizeCircularProgress,
                     isTimeRunning,
                     goals,
-                    isPenaltyActive
+                    isPenaltyActive,
+                    adStattus,
+                    context
                 )
             } else if (isPlayingGoalAnimation) {
                 Box(
@@ -130,7 +140,7 @@ fun OnePlayerScreenUi(
     }
 
     if (isGameFinish) {
-        GameFinished(onePlayerViewModel, navController, totalTime)
+        GameFinished(onePlayerViewModel, navController, totalTime, goals, playerName)
     }
 
 }
@@ -139,7 +149,9 @@ fun OnePlayerScreenUi(
 fun GameFinished(
     onePlayerViewModel: OnePlayerViewModel,
     navController: NavHostController,
-    totalTime: Int
+    totalTime: Int,
+    goals: Int,
+    playerName: String
 ) {
     Box(
         modifier = Modifier
@@ -159,8 +171,7 @@ fun GameFinished(
                         )
                     )
                 )
-                .fillMaxWidth()
-                .height(400.dp),
+                .fillMaxWidth(),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -178,27 +189,93 @@ fun GameFinished(
                     Modifier
                         .size(35.dp)
                         .clickable { navController.navigate(Destinations.HomeScreen.route) },
-                    tint = Color.White
+                    tint = AzulOscuro
                 )
-                Text(text = "Partido a $totalTime''", color = Color.White)
+                Text(text = "Partido a $totalTime''", color = AzulOscuro)
                 Icon(
                     imageVector = Icons.Default.Refresh, contentDescription = "",
                     Modifier
                         .size(35.dp)
-                        .clickable { onePlayerViewModel.restartGame() }, tint = Color.White
+                        .clickable { onePlayerViewModel.restartGame() }, tint = AzulOscuro
                 )
             }
             Spacer(modifier = Modifier.size(8.dp))
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 22.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Goles marcados: ",
+                    color = AzulOscuro,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 18.sp,
+                    fontFamily = rajdhani,
+                )
+                Text(
+                    text = "$goals ",
+                    color = Purple80,
+                    fontFamily = rajdhani,
+                    fontSize = 54.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            Spacer(modifier = Modifier.size(8.dp))
+            OutlinedTextField(
+                value = playerName,
+                onValueChange = { onePlayerViewModel.onValueChanged(it) },
+                placeholder = {
+                    Text(
+                        text = "Introduce tu nombre",
+                        color = AzulOscuro,
+                        fontFamily = rajdhani,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 16.sp
+                    )
+                },
+                maxLines = 1,
+                singleLine = true,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 32.dp)
+            )
+            Spacer(modifier = Modifier.size(32.dp))
             Box(
                 modifier = Modifier
-                    .height(3.dp)
-                    .background(Color.White.copy(0.2f))
-                    .fillMaxWidth()
-                    .padding(horizontal = 64.dp)
+                    .clickable {
+                        if (goals != 0) {
+                            onePlayerViewModel.savePuntuation(
+                                PuntuationDto(
+                                    name = playerName,
+                                    goals = goals
+                                )
+                            )
+                        }
+                    }
+                    .height(40.dp)
+                    .clip(RoundedCornerShape(6.dp))
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                AzulGradientClaro,
+                                AzulGradientOscuro
+                            )
+                        )
+                    ),
+                contentAlignment = Alignment.Center
             ) {
-
+                Text(
+                    modifier = Modifier.padding(horizontal = 24.dp),
+                    fontWeight = FontWeight.Bold,
+                    text = "Guardar Puntuación",
+                    fontSize = 18.sp,
+                    fontFamily = rajdhani,
+                    color = AzulOscuro
+                )
             }
-
+            Spacer(modifier = Modifier.size(16.dp))
         }
     }
 }
@@ -238,7 +315,9 @@ fun BodyUi(
     size: IntSize,
     isTimeRunning: Boolean,
     goals: Int,
-    isPenaltyActive: Boolean
+    isPenaltyActive: Boolean,
+    adStatus: Boolean,
+    context: Context
 ) {
     Column(
         modifier = Modifier
@@ -250,7 +329,7 @@ fun BodyUi(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
-        Spacer(modifier = Modifier.height(25.dp))
+        Spacer(modifier = Modifier.height(5.dp))
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -259,7 +338,7 @@ fun BodyUi(
         ) {
             PenaltyText(isPenaltyActive)
         }
-        Spacer(modifier = Modifier.height(25.dp))
+        Spacer(modifier = Modifier.height(15.dp))
         CircularProgressBar(
             totalTime = totalTime,
             Purple80,
@@ -275,17 +354,23 @@ fun BodyUi(
         )
         ButtonPlayPause(onePlayerViewModel, isTimeRunning)
         Goals(goals, Modifier.offset(0.dp, (-60).dp))
-        PenaltyButton(
+/*        PenaltyButton(
             Modifier
                 .align(Alignment.End)
-                .offset(0.dp, (-50).dp)
+                .offset(0.dp, (-50).dp),
+            onePlayerViewModel = onePlayerViewModel, adStatus = adStatus, context
         )
-    }
+    }*/
 }
 
-
+/*
 @Composable
-fun PenaltyButton(modifier: Modifier) {
+fun PenaltyButton(
+    modifier: Modifier,
+    onePlayerViewModel: OnePlayerViewModel,
+    adStatus: Boolean,
+    context: Context
+) {
 
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -293,7 +378,7 @@ fun PenaltyButton(modifier: Modifier) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "Tira un penalty  -->",
+            text = "Tira un Superpenalty  -->",
             fontFamily = rajdhani,
             fontSize = 14.sp,
             fontWeight = FontWeight.SemiBold,
@@ -302,11 +387,17 @@ fun PenaltyButton(modifier: Modifier) {
         Spacer(modifier = Modifier.size(18.dp))
         Box(
             modifier = Modifier
-                .clickable { }
+                .clickable {
+                    if (adStatus) {
+                    } else {
+                        onePlayerViewModel.loadIntersticialAd({},context)
+                    }
+                }
                 .size(100.dp, 40.dp)
                 .clip(RoundedCornerShape(6.dp))
                 .background(
                     brush = Brush.verticalGradient(
+
                         colors = listOf(
                             AzulGradientClaro,
                             AzulGradientOscuro
@@ -322,8 +413,9 @@ fun PenaltyButton(modifier: Modifier) {
                 color = Color.White
             )
         }
-    }
+    }*/
 }
+
 
 @Composable
 fun PenaltyText(isPenaltyActive: Boolean) {

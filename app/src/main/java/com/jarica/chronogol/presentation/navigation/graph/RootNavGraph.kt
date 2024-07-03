@@ -20,17 +20,20 @@ fun RootNavGraph(
 ) {
 
     NavHost(
-    navController = navController,
-    route = ROOT_GRAPH,
-    startDestination = Destinations.SplashScreen.route
-    ) {
-
+        navController = navController,
+        route = ROOT_GRAPH,
+        startDestination = Destinations.SplashScreen.route
+    )
+    {
         composable(Destinations.SplashScreen.route) {
             SplashScreenUi(navController)
         }
-
-        HomeNavGraph(navController = navController, onePlayerViewModel, optionViewModel, puntuationViewModel)
-
+        HomeNavGraph(
+            navController = navController,
+            onePlayerViewModel,
+            optionViewModel,
+            puntuationViewModel
+        )
     }
 }
 
